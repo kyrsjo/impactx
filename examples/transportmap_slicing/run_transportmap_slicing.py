@@ -71,19 +71,19 @@ distr = distribution.Gaussian(
 )
 sim.add_particles(bunch_charge_C, distr, npart)
 
-#Elements
-ns = 10
-el_drift1 = elements.Drift(ds=0.31, nslice=ns)
-el_quad1 = elements.Quad(name="Q1", ds=0.226, k=10.97, nslice=ns)
-#el_drift2 = elements.Drift(ds=1.0, nslice=ns)
+
 #el_apl1   = elements.ChrPlasmaLens(ds=0.02, k=100, nslice=ns)
 
 
-# design the accelerator lattice)
+#Elements and lattice - all 3 possibilities for quad polarity
 ns = 10  # number of slices per ds in the element
 lattice = [
-    el_drift1,
-    el_quad1
+    elements.Drift(ds=1.0, nslice=ns),
+    elements.Quad(name="Q1", ds=0.226, k=8.16, nslice=ns),
+    elements.Drift(ds=0.224, nslice=ns),
+    elements.Quad(name="Q2", ds=0.226, k=-12.01, nslice=ns),
+    elements.Drift(ds=0.224, nslice=ns),
+    elements.Quad(name="Q3", ds=0.226, k=0, nslice=ns)
 ]
 sim.lattice.extend(lattice)
 
